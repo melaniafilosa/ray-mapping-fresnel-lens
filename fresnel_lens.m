@@ -1,0 +1,122 @@
+function [surfaces] = fresnel_lens();
+a0 = 10;
+h = 20;
+b = h+1;
+a = 2;
+za = -h:2*h/10^7:h;
+xa = -sqrt(a^2*(1-za.^2./(b^2)));
+% xa = -2:2/1000:0;
+% za = sqrt(b^2*(1-xa.^2./(a^2)));
+a1 = 2;
+za1 = -h:2*h/10^7:h;
+xa1 = sqrt(a1^2*(1-za.^2./(b^2)));
+n1= 1; n2= 1.5;
+
+figure(1)
+k = 1;
+surfaces(k).name='source';
+surfaces(k).xmin = -a0;
+surfaces(k).xmax = -a0;
+surfaces(k).zmin = -h;
+surfaces(k).zmax = h;
+surfaces(k).x=[-a0; -a0];
+surfaces(k).z=[-h; h];
+surfaces(k).n1=n1;
+surfaces(k).n2=n1;
+surfaces(k).intersection=@line_intersection;
+surfaces(k).action=@empty;
+hold on
+plot(surfaces(k).x, surfaces(k).z, 'r', 'Linewidth',2)
+k = 2;
+surfaces(k).name='left lens';
+surfaces(k).xmin = min(xa);
+surfaces(k).xmax = max(xa);
+surfaces(k).zmin = -h;
+surfaces(k).zmax = h; 
+surfaces(k).x=xa;
+surfaces(k).z=za;
+surfaces(k).axis = [a, b];
+surfaces(k).n1=n1;
+surfaces(k).n2=n2;
+surfaces(k).intersection=@ellipse_intersection;
+surfaces(k).action=@fresnel;
+plot(surfaces(k).x, surfaces(k).z, '  c', 'Linewidth',2)
+k = 3;
+surfaces(k).name='top lens';
+surfaces(k).xmin = max(xa)+10^-20;
+surfaces(k).xmax = min(xa1)-10^-20;
+surfaces(k).zmin = h;
+surfaces(k).zmax = h; 
+surfaces(k).x=[surfaces(k).xmin; surfaces(k).xmax];
+surfaces(k).z=[h; h];
+surfaces(k).n1=n1;
+surfaces(k).n2=n2;
+surfaces(k).intersection=@line_intersection;
+surfaces(k).action=@refract_line;
+plot(surfaces(k).x, surfaces(k).z, '  c', 'Linewidth',2)
+k = 4;
+surfaces(k).name='bottom lens';
+surfaces(k).xmin = max(xa)+10^-20;
+surfaces(k).xmax = min(xa1)-10^-20;
+surfaces(k).zmin = -h;
+surfaces(k).zmax = -h;
+surfaces(k).x=[surfaces(k).xmin; surfaces(k).xmax];
+surfaces(k).z=[-h; -h];
+surfaces(k).n1=n1;
+surfaces(k).n2=n2;
+surfaces(k).intersection=@line_intersection;
+surfaces(k).action=@refract_line;
+plot(surfaces(k).x, surfaces(k).z, ' c', 'Linewidth',2)
+k = 5;
+surfaces(k).name='right lens';
+surfaces(k).xmin = min(xa1);
+surfaces(k).xmax = max(xa1);
+surfaces(k).zmin = -h;
+surfaces(k).zmax = h;
+surfaces(k).x=xa1;
+surfaces(k).z=za1;
+surfaces(k).n1=n1;
+surfaces(k).n2=n2;
+surfaces(k).axis = [a,b];
+surfaces(k).intersection=@ellipse_intersection;
+surfaces(k).action=@fresnel;
+plot(surfaces(k).x, surfaces(k).z, 'c', 'Linewidth',2)
+k = 6;
+surfaces(k).name='target';
+surfaces(k).xmin = a0;
+surfaces(k).xmax = a0;
+surfaces(k).zmin = -h-1;
+surfaces(k).zmax = h+1;
+surfaces(k).x=[a0; a0];
+surfaces(k).z=[-h-1; h+1];
+surfaces(k).n1=n1;
+surfaces(k).n2=n1;
+surfaces(k).intersection=@line_intersection;
+surfaces(k).action=@empty;
+plot(surfaces(k).x, surfaces(k).z, 'r', 'Linewidth',2)
+k = 7;
+surfaces(k).name='detector bottom';
+surfaces(k).xmin = -a0;
+surfaces(k).xmax = a0;
+surfaces(k).zmin = -h-1;
+surfaces(k).zmax = -h-1;
+surfaces(k).x=[-a0; a0];
+surfaces(k).z=[-h-1; -h-1];
+surfaces(k).n1=n1;
+surfaces(k).n2=n1;
+surfaces(k).intersection=@line_intersection;
+surfaces(k).action=@empty;
+plot(surfaces(k).x, surfaces(k).z, 'm', 'Linewidth',2)
+k = 8;
+surfaces(k).name='detector top';
+surfaces(k).xmin = -a0;
+surfaces(k).xmax = a0;
+surfaces(k).zmin = h+1;
+surfaces(k).zmax = h+1;
+surfaces(k).x=[-a0; a0];
+surfaces(k).z=[h+1; h+1];
+surfaces(k).n1=n1;
+surfaces(k).n2=n1;
+surfaces(k).intersection=@line_intersection;
+surfaces(k).action=@empty;
+plot(surfaces(k).x, surfaces(k).z, 'm', 'Linewidth',2)
