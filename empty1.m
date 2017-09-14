@@ -1,7 +1,7 @@
 function [reflected, transmitted, R, T]=empty1(ray,surfaces, k, variables)
 reflected = ray;
 transmitted = ray;
-R = 0;
+R = 1;
 T = 0;
 if(ray.n==1)
     reflected.n = 1;

@@ -38,9 +38,10 @@ if(k~=7)
     ray.z = zn(k);
     ray.surface = k;
     % plot([x0, xn(k)], [z0, zn(k)], ' g', 'linewidth', 1.2);
-    [reflected, transmitted, R, T] = surfaces(k).action(ray,surfaces(k),...
+
+     [reflected, transmitted, R, T] = surfaces(k).action(ray,surfaces(k),...
                                                         k,variables);
-                                                    
+
 else
     ray.surface = k;
     R = 0;

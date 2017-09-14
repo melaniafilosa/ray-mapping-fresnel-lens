@@ -60,11 +60,16 @@ while(abs(targetA.z-targetB.z)>toll)
   
    if(isequal(pathA,pathM))
             A = M;
-            targetA = targetM;        
+            targetA = targetM;
+            pathA = pathM;
+            RA = RM;
+            TA = TM;
    else
         % if(A.surface~=M.surface)
         B = M;   
         targetB = targetM;
+        RB = RM;
+        TB = TM;
         pathB = pathM;
    end
 % figure(2)

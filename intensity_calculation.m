@@ -1,11 +1,11 @@
 % This function computes the intensity at the target 
 % along a given direction it considers 
 function intensity = intensity_calculation(A, B, targetA, targetB,...
-                             pathA,pathB,surfaces, action, variables, K)
+                             pathA,pathB,surfaces, action, variables)
                         
   intensity = 0;
   
-  max_number_of_reflections = 12;
+  max_number_of_reflections = 10;
   % If A and B are on the same line
   % (this is always true at the first step as both start from the target
   if(A.surface==B.surface)
@@ -14,12 +14,17 @@ function intensity = intensity_calculation(A, B, targetA, targetB,...
                 % Compute the intensity
                 % intensity = intensity + abs(targetA.x-targetB.x);    
               %  if(~isequal(pathA, [4,3,2,1]))
-                figure(6)
+                figure(8)
                 plot([targetA.z, targetB.z],[targetA.sz, targetB.sz],'. c')            
                 hold on
                 drawnow
                 disp(['pathA ', num2str(pathA)]);
                 disp(['pathB ', num2str(pathB)]); 
+%                 disp(['RA ', num2str(RA)]);
+%                 disp(['TA ', num2str(TA)]);
+%                 disp(['RA+TA ', num2str(RA+TA)]);
+                
+                
               %  end
 
                else
@@ -50,16 +55,16 @@ function intensity = intensity_calculation(A, B, targetA, targetB,...
                  end
                  if(K>length(action))
                      disp('Error')
-                     K
+                    % K
                  end
                   if(action(K)==1)
                       intensity = intensity+ intensity_calculation(At, Bt, targetA,...
                                          targetB, pathA,pathB, surfaces, action, ...
-                                         variables,K); 
+                                         variables); 
                   else
                       intensity = intensity+ intensity_calculation(Ar, Br, targetA,...
                                          targetB, pathA,pathB,surfaces, action, ...
-                                         variables,K); 
+                                         variables); 
                   end
                                  
               else
@@ -101,7 +106,7 @@ function intensity = intensity_calculation(A, B, targetA, targetB,...
               
                   intensity = intensity+intensity_calculation(A, C1, targetA,...
                                                 targetC1, pathA,pathC1,surfaces, ...
-                                                action, variables,K);
+                                                action, variables);
               
              
           else
@@ -114,7 +119,7 @@ function intensity = intensity_calculation(A, B, targetA, targetB,...
         
               intensity = intensity+intensity_calculation(C2, B, targetC2,...
                                                targetB, pathC2,pathB, surfaces, ...
-                                               action, variables,K);
+                                               action, variables);
          
       else % (if the maximum number of reflection is reached)
           % The contribution to the intensity given by those rays is

@@ -51,8 +51,9 @@ mc_intensity = zeros(length(range)-1,  1);
          mc_raytracing_paths(surfaces,z_mc, tau_mc, variables);
      f = find(path);
  
-      if (path(f(end))==1 && z_mc_out>=surfaces(1).zmin ...
-             && z_mc_out<=surfaces(1).zmax)
+      if (path(f(end))==4 && z_mc_out>=surfaces(4).zmin+0.01 ...
+             && z_mc_out<=surfaces(4).zmax-0.01 ...
+             && tau_mc_out>=-1+0.01 && tau_mc_out<=1-0.01)
         mc_fill_vector(z_mc, tau_mc, z_mc_out, tau_mc_out, path);
       else
           mc_fill_vector1(z_mc, tau_mc, z_mc_out, tau_mc_out, path);
