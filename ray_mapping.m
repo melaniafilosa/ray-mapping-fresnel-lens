@@ -14,7 +14,7 @@ if(fig)
   axis([-18 18 0 41])
 end
 delta1 = 0.02;
-N_tau_bins = 100;
+N_tau_bins = 10;
 delta2 = delta1/N_tau_bins;
 eps_target_angle = 0.01;
 eta2 = -1+eps_target_angle:delta2:1-eps_target_angle;
@@ -47,7 +47,7 @@ for t = ray1.z:step:ray2.z-step
       ray2.sx = ray1.sx;
       ray1.surface = -1;
       ray2.surface = -1;
-      action = [1,0,0,0,0,0,0,1,1,1,1,1];% ,0,0,0,0,0,0,0,1,1];
+      action = [1,0,0,1,1,1,1,1,1,1];
       intensity2(k)= intensity_calculation(ray1, ray2, ray1, ray2, path, ...
                        path, surfaces,...
                        action, variables);

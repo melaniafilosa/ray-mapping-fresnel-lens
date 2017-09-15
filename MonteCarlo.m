@@ -28,7 +28,7 @@ variables = Create_variables();
 surfaces = Create_lens_fresnel(variables);
 delta = 0.02;
 range = -1: delta: 1;
-Nr = 10^5;
+Nr = 10^7;
 
 
 % Chose the middle of each bin

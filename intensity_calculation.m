@@ -5,7 +5,7 @@ function intensity = intensity_calculation(A, B, targetA, targetB,...
                         
   intensity = 0;
   
-  max_number_of_reflections = 10;
+  max_number_of_reflections = 8;
   % If A and B are on the same line
   % (this is always true at the first step as both start from the target
   if(A.surface==B.surface)
@@ -14,8 +14,8 @@ function intensity = intensity_calculation(A, B, targetA, targetB,...
                 % Compute the intensity
                 % intensity = intensity + abs(targetA.x-targetB.x);    
               %  if(~isequal(pathA, [4,3,2,1]))
-                figure(8)
-                plot([targetA.z, targetB.z],[targetA.sz, targetB.sz],'. c')            
+                figure(12)
+                plot([targetA.z, targetB.z],[targetA.sz, targetB.sz],'. r')            
                 hold on
                 drawnow
                 disp(['pathA ', num2str(pathA)]);
