@@ -1,6 +1,7 @@
-function [zout, thetaout,path]=mc_raytracing_paths(surfaces, z , tau, variables)
+function [zout, thetaout,path]=mc_raytracing_paths(surfaces, z , tau,...
+    variables, energy)
 
-graf = 0;
+graf = 1;
 p.wavelength=600;
 M=10;                     % max lenght of the path
 raypath.wavelength=600;
@@ -50,7 +51,7 @@ while( k~=4 && k~=5 && k~=6  && k~=1 && surfaces_hit<100 )
          plot([x0, xn(k)], [z0, zn(k)], '. k');           
     end
         [ray1, ray2, ray, check] = ...
-            surfaces(k).action(ray,surfaces(k),k,x0,z0, variables);
+            surfaces(k).action(ray,surfaces(k),k,x0,z0, variables, enereg);
             
         
  end    % end while

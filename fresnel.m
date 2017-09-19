@@ -1,4 +1,5 @@
-function [ray1,ray2,ray, check] = fresnel(ray, surface,k, x0, z0, variables)
+function [ray1,ray2,ray, check, energy] = fresnel(ray, surface,k, x0, z0, ...
+    variables, energy)
 % Compute the direction of the reflected ray
 ray1 = reflect(ray, surface, k);
 % Compute the direction of the transmitted ray
@@ -135,13 +136,20 @@ else
     if(R==0 || T==0)
         disp('R or T are 0')
     end
+    action = input('action: ');
    %if (R>rand(1))
-   if(k~=2 && k~=3)
-       ray = ray1;
+%C = rand(1)
+   if(action == 0)
+        ray = ray1;
         check = 0;
+        energy = R*energy;
     else
        ray = ray2;
        check = 1;
+       energy = T*energy;
+       
+       
    end
+
    
 end
