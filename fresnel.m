@@ -135,7 +135,8 @@ else
     if(R==0 || T==0)
         disp('R or T are 0')
     end
-   if (R>rand(1))
+   %if (R>rand(1))
+   if(k~=2 && k~=3)
        ray = ray1;
         check = 0;
     else

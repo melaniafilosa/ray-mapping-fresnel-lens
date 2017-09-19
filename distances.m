@@ -14,7 +14,7 @@
 function [k] = distances(xn,zn,ray,s, valid)
     N=length(xn);
     d = sqrt((xn-ray.x).^2+(zn-ray.z).^2);
-    epsilon_d = 1.0e-13;
+    epsilon_d = 1.0e-11;
    % epsilon = 1.0e-7;
     t = 1;
     k = -1;

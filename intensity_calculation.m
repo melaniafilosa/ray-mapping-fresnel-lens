@@ -14,8 +14,8 @@ function intensity = intensity_calculation(A, B, targetA, targetB,...
                 % Compute the intensity
                 % intensity = intensity + abs(targetA.x-targetB.x);    
               %  if(~isequal(pathA, [4,3,2,1]))
-                figure(12)
-                plot([targetA.z, targetB.z],[targetA.sz, targetB.sz],'. r')            
+                figure(8)
+                plot([targetA.z, targetB.z],[targetA.sz, targetB.sz],'. b')            
                 hold on
                 drawnow
                 disp(['pathA ', num2str(pathA)]);
@@ -34,6 +34,10 @@ function intensity = intensity_calculation(A, B, targetA, targetB,...
               end
       else % (if the source is not reached yet)
           % and if nether the target nor the reflectors are hit again
+%           if(length(pathA)==6)
+%           figure(1)
+%           plot([targetA.z, targetB.z],[targetA.sz, targetB.sz],'. b')
+%           end
           if((A.surface~=4) && (A.surface~=5)...
                   && (A.surface~=6) && (A.surface~=7))
               % If the maximum number of reflection is not reached
@@ -47,10 +51,7 @@ function intensity = intensity_calculation(A, B, targetA, targetB,...
                       [Br, Bt, RB, TB] = raytracing(B, surfaces, variables);    
                       pathA = [pathA, At.surface];
                       pathB = [pathB, Bt.surface];
-                      K = length(pathA);
-                      if(isequal(pathA,[4 2 1]))
-                          disp('Error')
-                      end
+                      K = length(pathA)-1;
 
                  end
                  if(K>length(action))

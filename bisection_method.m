@@ -24,7 +24,7 @@ while(abs(targetA.z-targetB.z)>toll)
         Mt = M;
         % Do ray tracing for target M
         [Mr,Mt, RM, TM] = raytracing(M, surfaces, variables);
-        K = K+1;
+        K = length(pathM);
         if(action(K)==1)
             M = Mt;
             if(Mr.n==1)
