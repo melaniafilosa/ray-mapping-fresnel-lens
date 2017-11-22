@@ -31,7 +31,8 @@ surfaces = Create_lens_fresnel(variables);
 delta = 0.02;
 range = -1: delta: 1;
 Nr = 1;
-
+z_mc = input('z ');
+tau_mc = input('tau ');
 
 % Chose the middle of each bin
 for i = 1:(length(range)-1)
@@ -45,9 +46,9 @@ mc_intensity = zeros(length(range)-1,  1);
  for i=1:Nr
    % z_mc = 0;
    % z_mc = -(surfaces(1).zmax-surfaces(1).zmin)*rand(1)+surfaces(1).zmax;
-    z_mc = (10)*rand(1)-(5);
+   % z_mc = (4)*rand(1)-(2);
     %tau_mc = ((2*5/sqrt(9.5^2+25))*rand(1)-5/sqrt(9.5^2+125));
-    tau_mc = (mc_min_tau+(mc_max_tau-mc_min_tau)*rand(1));
+   % tau_mc = (mc_min_tau+(mc_max_tau-mc_min_tau)*rand(1));
    %  z_mc = input('z ');   
      [z_mc_out, tau_mc_out,path, energy] = ...
          mc_raytracing_paths(surfaces,z_mc, tau_mc, variables, 1);

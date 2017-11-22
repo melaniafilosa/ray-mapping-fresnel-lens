@@ -26,7 +26,7 @@ number_target = 4;
 ray1.z = surfaces(4).zmin+0.01;
 %ray1.z = input('targetA');
 ray2.z = surfaces(4).zmax-0.01;
-N_z_bins = 1;
+N_z_bins = 10;
 step = (ray2.z-ray1.z)/10;
 % k = 1;
 % eta2(k) = -0.6;
@@ -48,7 +48,9 @@ for t = ray1.z:step:ray2.z-step
       ray2.sx = ray1.sx;
       ray1.surface = -1;
       ray2.surface = -1;
-      action = [1,0,0,0,0,1,1,1,1,1];
+      ray1.I = 1;
+      ray2.I = 1;
+      action = [1,0,0,1,1,1,1,1,1,1];
       intensity2(k)= intensity_calculation(ray1, ray2, ray1, ray2, path, ...
                        path, surfaces,...
                        action, variables);

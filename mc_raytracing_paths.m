@@ -1,7 +1,7 @@
 function [zout, thetaout,path, energy]=mc_raytracing_paths(surfaces, z , tau,...
     variables, energy)
 
-graf = 1;
+graf = 0;
 p.wavelength=600;
 M=10;                     % max lenght of the path
 raypath.wavelength=600;

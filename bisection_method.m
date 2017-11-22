@@ -18,15 +18,19 @@ while(abs(targetA.z-targetB.z)>toll)
     targetM.n = 1;
     targetM.surface = -1;
     M = targetM;
+    M.I = 1;
+  
     i = 2;
     while (i <=length(pathA)) 
         Mr = M;
         Mt = M;
         % Do ray tracing for target M
         [Mr,Mt, RM, TM] = raytracing(M, surfaces, variables);
+        
         K = length(pathM);
         if(action(K)==1)
             M = Mt;
+            M.I = Mt.T;
             if(Mr.n==1)
                 M.n = 1.5;
             else
@@ -35,6 +39,7 @@ while(abs(targetA.z-targetB.z)>toll)
        
         else
             M = Mr;
+            M.I = Mr.R;
             if(Mr.n==1)
                 M.n = 1;
             else

@@ -137,7 +137,7 @@ else
         disp('R or T are 0')
     end
     action = input('action: ');
-   %if (R>rand(1))
+  % if (R>rand(1))
 %C = rand(1)
    if(action == 0)
         ray = ray1;

@@ -7,7 +7,7 @@ ray1 = reflected;
 ray2 = transmitted;
 % plot([ray1.x, x0], [ray1.z, z0], 'r')
 % plot([ray2.x, x0], [ray2.z, z0], 'g')
-%input_angle = ray.sx;
+% input_angle = ray.sx;
 
 if (ray.n==surface.n1)
     n1 = surface.n1;
@@ -72,6 +72,8 @@ nray2.sz = sqrt(1-nray2.sx^2);
 if (abs(nray1.sx-nray2.sx)<=1e-12)
     R = 1;
     T = 0;
+    reflected.R = R*ray.I;
+    transmitted.T = T*ray.I;
     if(abs(asin(nray.sx)*180/pi)>=asin(1/1.5))
          R = 1;
          T = 0;
@@ -111,6 +113,7 @@ else
     Rp = rp^2;
     Rs = rs^2;
     R = (Rp+Rs)/2;
+    
     % 
     % Calculate the transmittance
     % to = Ortogonal component of T
@@ -121,6 +124,8 @@ else
     Tp = (surface.n2*nray2.sz/(surface.n1*nray.sz))*tp^2;
     Ts = (surface.n2*nray2.sz/(surface.n1*nray.sz))*ts^2;
     T = (Tp+Ts)/2;
+    reflected.R = R*ray.I;
+    transmitted.T = T*ray.I;
     if(abs(rp+1-surface.n2*tp/surface.n1)>1e-7)
       disp(['Tp*n2/n1; ', num2str(surfaces.n2*tp/surfaces.n1)])
       disp(['Rp+1: ', num2str(rp+1)])
