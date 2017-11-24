@@ -124,6 +124,7 @@ else
     Tp = (surface.n2*nray2.sz/(surface.n1*nray.sz))*tp^2;
     Ts = (surface.n2*nray2.sz/(surface.n1*nray.sz))*ts^2;
     T = (Tp+Ts)/2;
+    % Store the intensity
     reflected.R = R*ray.I;
     transmitted.T = T*ray.I;
     if(abs(rp+1-surface.n2*tp/surface.n1)>1e-7)

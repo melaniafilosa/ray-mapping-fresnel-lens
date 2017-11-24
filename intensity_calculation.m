@@ -5,7 +5,7 @@ function intensity = intensity_calculation(A, B, targetA, targetB,...
                         
   intensity = 0;
   
-  max_number_of_reflections = 6;
+  max_number_of_reflections = 4;
   % If A and B are on the same line
   % (this is always true at the first step as both start from the target
   if(A.surface==B.surface)
@@ -13,19 +13,24 @@ function intensity = intensity_calculation(A, B, targetA, targetB,...
              if(A.n==1.5)  
                 % Compute the intensity
                 % intensity = intensity + abs(targetA.x-targetB.x);    
-                if(isequal(pathA, [4,3,2,3,2,1]))
+                if(isequal(pathA, [4,3,2,1]))
                 figure(7)
                 plot([targetA.z, targetB.z],[targetA.sz, targetB.sz],'. r')            
                 hold on
                 drawnow
                 disp(['pathA ', num2str(pathA)]);
                 disp(['pathB ', num2str(pathB)]); 
-                if(A.R ~=0 && A.R ~=1)
-                A.R
-                A.T
-                B.R
-                B.T
-                end
+                A.I
+                B.I
+                targetA
+                targetB
+                %                 if(A.R ~=0 && A.R ~=1)
+%                 A.R;
+%                 A.T;
+%                 B.R;
+%                 B.T;
+                
+%                end
 %                 disp(['RA ', num2str(RA)]); disp(['TA ', num2str(TA)]);
 %                 disp(['RA+TA ', num2str(RA+TA)]);
                 
@@ -54,10 +59,8 @@ function intensity = intensity_calculation(A, B, targetA, targetB,...
                  if(A.surface~=1)                  
                       [Ar, At, RA, TA] = raytracing(A, surfaces, variables);
                       [Br, Bt, RB, TB] = raytracing(B, surfaces, variables);    
-                      At.I = At.T;
-                      Ar.I = Ar.R;
-                      Br.I = Br.R;
-                      Bt.I = Bt.T;
+                     % At.I = A.I*TA;
+                      
                       pathA = [pathA, At.surface];
                       pathB = [pathB, Bt.surface];
                       K = length(pathA)-1;
@@ -68,13 +71,19 @@ function intensity = intensity_calculation(A, B, targetA, targetB,...
                     % K
                  end
                   if(action(K)==1)
-                      
+                      if(At.surface~=1)&&(Bt.surface~=1)
+                          At.I = A.I*TA;
+                          Bt.I = B.I*TB;
+                      end
                       intensity = intensity+ intensity_calculation(At, Bt, targetA,...
                                          targetB, pathA,pathB, surfaces, action, ...
                                          variables); 
                                     
                   else
-                      
+                      if(At.surface~=1)&&(Bt.surface~=1)
+                          Ar.I = A.I*RA;
+                          Br.I = B.I*RB;
+                      end
                       intensity = intensity+ intensity_calculation(Ar, Br, targetA,...
                                          targetB, pathA,pathB,surfaces, action, ...
                                          variables); 

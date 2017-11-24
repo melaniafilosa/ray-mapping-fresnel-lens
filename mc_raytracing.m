@@ -44,7 +44,8 @@ while( k~=4 && k~=5 && k~=6  && k~=1 && surfaces_hit<100)
     a = a+1;
     % plot the path of the rays
     
-    [ray1, ray2,ray,check] = surfaces(k).action(ray,surfaces(k), k, x0, z0, variables);
+    [ray1, ray2,ray,check, energy] = surfaces(k).action(ray,surfaces(k), ...
+                                                  k, x0, z0, variables, 1);
     if ( graf)
          figure(3)
          hold on

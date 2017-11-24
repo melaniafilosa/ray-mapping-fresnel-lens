@@ -28,10 +28,10 @@ ray1.z = surfaces(4).zmin+0.01;
 ray2.z = surfaces(4).zmax-0.01;
 N_z_bins = 10;
 step = (ray2.z-ray1.z)/10;
-% k = 1;
-% eta2(k) = -0.6;
+  k = 1;
+ eta2(k) = 0.162;
 for t = ray1.z:step:ray2.z-step
- for k =1:length(eta2)
+ %for k =1:length(eta2)
 
       j = number_target;
       max_iter = 0;
@@ -50,12 +50,12 @@ for t = ray1.z:step:ray2.z-step
       ray2.surface = -1;
       ray1.I = 1;
       ray2.I = 1;
-      action = [1,0,0,1,1,1,1,1,1,1];
+      action = [1,1,1,1,1,1,1,1,1,1];
       intensity2(k)= intensity_calculation(ray1, ray2, ray1, ray2, path, ...
                        path, surfaces,...
                        action, variables);
       int2(k) = int2(k)+intensity2(k);
-  end
+  %end
 end
 
 

@@ -17,6 +17,7 @@ while(abs(targetA.z-targetB.z)>toll)
     targetM.sz = targetA.sz;
     targetM.n = 1;
     targetM.surface = -1;
+    targetM.I = 1;
     M = targetM;
     M.I = 1;
   

@@ -1,8 +1,8 @@
 function [reflected, transmitted, R, T]=empty1(ray,surfaces, k, variables)
 reflected = ray;
 transmitted = ray;
-R = 1;
-T = 0;
+R = ray.I;
+T = 1-R;
 reflected.R = R;
 transmitted.T = T;
 if(ray.n==1)
