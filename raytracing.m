@@ -5,6 +5,8 @@ function [reflected, transmitted, R, T] = ...
            raytracing(ray, surfaces, variables)
 
 k = -1;
+x0 = ray.x;
+z0 = ray.z;
 % (x,z) = coordinates of the initial position 
 % ray.x = surfaces(4).x(1);  
 % ray.z = z;  
@@ -26,7 +28,7 @@ for  i=1:length(surfaces)
       [xn(i),zn(i),s(i), valid(i)] = ...
           surfaces(i).intersection(ray, surfaces(i), variables);
 end
-
+plot(xn(k), zn(k), '*')
 [k] = distances(xn,zn,ray,s,valid);    
 if(k==-1)
    % disp('Error')
@@ -37,8 +39,10 @@ if(k~=7)
     ray.x = xn(k);                        
     ray.z = zn(k);
     ray.surface = k;
-    % plot([x0, xn(k)], [z0, zn(k)], ' g', 'linewidth', 1.2);
-     [reflected, transmitted, R, T] = surfaces(k).action(ray,surfaces(k),...
+    figure(4)
+    hold on
+    plot([x0, xn(k)], [z0, zn(k)], ' g', 'linewidth', 1.2);
+    [reflected, transmitted, R, T] = surfaces(k).action(ray,surfaces(k),...
                                                         k,variables);
 else
     ray.surface = k;

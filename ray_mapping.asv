@@ -51,13 +51,11 @@ for t = ray1.z:step:ray2.z-step
       ray1.I = 1;
       ray2.I = 1;
       action = [1,1,1,1,1,1,1,1,1,1];
-      intensity = [];
-      intensity= intensity_computation(ray1, ray2, ray1, ray2, path, ...
+      targetA, = intensity_calculation(ray1, ray2, ray1, ray2, path, ...
                        path, surfaces,...
-                       action, variables, intensity);
-       
-      
-   %   int2(k) = int2(k)+intensity2(k);
+                       action, variables);
+      intenisty2(k)
+      int2(k) = int2(k)+intensity2(k);
   %end
 end
 
