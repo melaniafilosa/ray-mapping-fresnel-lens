@@ -9,7 +9,7 @@
  % i = index of the surface hit
  
 function [xn,zn,s, valid] = line_intersection(ray,surfaces, variables)
-
+ 
 num = (ray.z-surfaces.z(1))*(surfaces.x(2)-surfaces.x(1))- ...
       (ray.x-surfaces.x(1))*(surfaces.z(2)-surfaces.z(1));
 den = ray.sx*(surfaces.z(2)-surfaces.z(1))- ...

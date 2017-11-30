@@ -9,13 +9,13 @@ graf = 0;
 a = 2;
 k = -1;
 % (x,z) = coordinates of the initial position 
-ray.x = surfaces(4).x(1);  
+ray.x = surfaces(1).x(1);  
 ray.z = z;  
 ray.n = 1;
 % Initial angle with respect to the optical axis
 % Ray direction
 ray.sz = tau;
-ray.sx = -sqrt(1-tau^2);
+ray.sx = sqrt(1-tau^2);
 % store initial conditions for debugging
 % ray.n=1;                           % we start in air
 ray_source = ray;
@@ -26,7 +26,7 @@ zn = zeros(length(surfaces) ,1);                  % zn(i) = z+s(i)*cos(theta)
 
 surfaces_hit = 0;
 
-while( k~=4 && k~=5 && k~=6  && k~=1 && surfaces_hit<100)
+while( k~=4 && k~=5 && k~=6  && k~=1 && k~=7 && surfaces_hit<100)
     surfaces_hit = surfaces_hit+1;
     x0 = ray.x;                            
     z0 = ray.z;
@@ -38,14 +38,17 @@ while( k~=4 && k~=5 && k~=6  && k~=1 && surfaces_hit<100)
     [k] = distances(xn,zn,ray,s,valid);    
     %  disp([' closest intersection from surface ',num2str(k),' ',surfaces(k).name]);
     % (x,z) = coordinates of the closer intersection
-    ray.x = xn(k);                        
-    ray.z = zn(k);
-    plot([x0, xn(k)], [z0, zn(k)], ' g', 'linewidth', 1.2); 
-    a = a+1;
-    % plot the path of the rays
-    
-    [ray1, ray2,ray,check, energy] = surfaces(k).action(ray,surfaces(k), ...
+    if(k~=7)
+        ray.x = xn(k);                        
+        ray.z = zn(k);
+
+       % plot([x0, xn(k)], [z0, zn(k)], ' g', 'linewidth', 1.2); 
+        a = a+1;
+        % plot the path of the rays
+
+        [ray1, ray2,ray,check, energy] = surfaces(k).action(ray,surfaces(k), ...
                                                   k, x0, z0, variables, 1);
+    end
     if ( graf)
          figure(3)
          hold on
@@ -81,6 +84,13 @@ while( k~=4 && k~=5 && k~=6  && k~=1 && surfaces_hit<100)
 
 
  % xout = xn(k);
- zout = zn(k);
- thetaout = ray.sz;
- last_surface =  k;
+ if(k~=7)
+     zout = zn(k);
+     thetaout = ray.sz;
+     last_surface =  k;
+ else
+     xout= 0;                        
+     zout = 0;
+     thetaout = tau;
+     last_surface = k;
+ end

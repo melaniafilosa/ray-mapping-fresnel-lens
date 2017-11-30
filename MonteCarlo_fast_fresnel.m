@@ -35,7 +35,7 @@ rng(7);
 % global mc_intensity;
 delta = 0.02;
 range = -1: delta: 1;
-Nr = 10^5;
+Nr = 10^3;
 graf = 0;
 % if(graf)
 %     figure(1)
@@ -50,16 +50,16 @@ end
 mc_intensity = zeros(length(range)-1,  1);
  for i=1:Nr
      z_mc = 10*rand(1)-5;
-    % z_mc = 0;
-   %  tau_mc = ((2*5/sqrt(9.5^2+25))*rand(1)-5/sqrt(9.5^2+25));
-   tau_mc = 2*rand(1)-1;
+     % z_mc = 0;
+     %  tau_mc = ((2*5/sqrt(9.5^2+25))*rand(1)-5/sqrt(9.5^2+25));
+     tau_mc = 2*rand(1)-1;
 %    z_mc = input('z: ');
 %    tau_mc = input('tau: ');
      [z_mc_out, tau_mc_out, last_surface] = ...
          mc_raytracing(surfaces,z_mc, tau_mc, variables); 
      % fill_vector(x(i),tau(i),xout(i),tauout(i),path,0);
-     if (last_surface==1 && z_mc_out>=surfaces(1).zmin ...
-             && z_mc_out<=surfaces(1).zmax)
+     if (last_surface==4 && z_mc_out>=surfaces(4).zmin ...
+             && z_mc_out<=surfaces(4).zmax)
          %-0.01)
       mc_fill_vector(z_mc, tau_mc, z_mc_out, tau_mc_out, path);
       mc_intensity = mc_fill_bins(tau_mc_out, mc_intensity, delta);

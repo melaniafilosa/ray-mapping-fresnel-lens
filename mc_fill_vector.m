@@ -8,4 +8,4 @@ mc_vector.zout = [mc_vector.zout; zout];
 mc_vector.tauin = [mc_vector.tauin; t];
 mc_vector.tauout = [mc_vector.tauout; tout];
 mc_vector.path = [mc_vector.path path];
-mc_vector.energy = [mc_vector.energy energy];
+%mc_vector.energy = [mc_vector.energy energy];

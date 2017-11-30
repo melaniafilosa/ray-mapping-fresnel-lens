@@ -1,6 +1,4 @@
-% This script computes the Monte Carlo ray tracing
-% Replace mc with mc_vector
-% mc_vector = vector with rays information rays traced throught MC
+%This script computes the Monte Carlo ray tracing
 tic
 % surfaces = Create_surfaces();
 % variables = Create_variables();
@@ -14,9 +12,17 @@ mc_vector.zout=[];
 mc_vector.tauout=[];
 mc_vector.path=[];
 
+global mc_vector1
+mc_vector1.wavelenght=1000;
+mc_vector1.zin=[];
+mc_vector1.tauin=[];
+mc_vector1.zout=[];
+mc_vector1.tauout=[];
+mc_vector1.path=[];
 
 % hold on
-
+variables = Create_variables();
+surfaces = Create_lens_fresnel(variables);
 % Nr = input('Nr = ');
 % Nr = variables.nr
 % rays_mc_lost = 0;
@@ -27,8 +33,8 @@ rng(7);
 % global mc_intensity;
 delta = 0.02;
 range = -1: delta: 1;
-Nr = 100;
-graf = 1;
+Nr = 10^5;
+graf = 0;
 % if(graf)
 %     figure(1)
 %     hold on
@@ -38,20 +44,36 @@ graf = 1;
 for i = 1:(length(range)-1)
     xrange(i) = range(i)+(range(i+1)-range(i))/2;
 end
-
+mc_min_tau = -1;
+mc_max_tau = 1; 
+qmc_intensity = zeros(length(range)-1,  1);
+% % Create a sobol set in two dimensions
+P = sobolset(2);
+x = net(P, Nr);
+% %figure(4)
+% figure(1)
+% hold on
 mc_intensity = zeros(length(range)-1,  1);
  for i=1:Nr
-       z_mc = ((4)*rand(1)-2);
-     %  tau_mc = ((2)*rand(1)-1);
-      tau_mc = ((2*5/sqrt(9.5^2+25))*rand(1)-5/sqrt(9.5^2+25));
-     % tau_mc = 0;
-     % tau_mc =input('tau ');
-     [z_mc_out, tau_mc_out, last_surface] = mc_raytracing1(surfaces,z_mc, tau_mc, variables); 
+     z_mc = surfaces(1).zmin+2*surfaces(1).zmax*x(i,1);
+     tau_mc = -1+2*x(i,2);
+%      figure(1)
+%      plot(z_mc, tau_mc, '.');
+%      hold on
+%    z_mc = input('z: ');
+%    tau_mc = input('tau: ');
+     [z_mc_out, tau_mc_out, last_surface] = ...
+         mc_raytracing(surfaces,z_mc, tau_mc, variables); 
      % fill_vector(x(i),tau(i),xout(i),tauout(i),path,0);
-     if (last_surface==6)
+     if (last_surface==4 && z_mc_out>=surfaces(4).zmin ...
+             && z_mc_out<=surfaces(4).zmax)
          %-0.01)
-         mc_fill_vector(z_mc, tau_mc, z_mc_out, tau_mc_out, path);
-         mc_intensity = mc_fill_bins(tau_mc_out, mc_intensity, delta);
+      mc_fill_vector(z_mc, tau_mc, z_mc_out, tau_mc_out, path);
+      qmc_intensity = mc_fill_bins(tau_mc_out, mc_intensity, delta);
+     else 
+         %if(last_surface~=1)
+             mc_fill_vector1(z_mc, tau_mc, z_mc_out, tau_mc_out, path);
+         %end
      end
 %      if(i==10^4)
 %          mc_intensity104 = mc_intensity;
@@ -83,3 +105,6 @@ mc_intensity = zeros(length(range)-1,  1);
  end
 
 toc
+
+
+% 
