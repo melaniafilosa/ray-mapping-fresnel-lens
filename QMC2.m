@@ -1,6 +1,3 @@
-% This script computes Monte Carlo ray tracing  for the CPC
-% It considers also Fresnel reflection and stores the paths
-
 tic
 plotpoints = 0;    % if 1 we plot points of triangles during calculations;
 % give random number generator the same starting point
@@ -38,17 +35,15 @@ Nr = 10^3;
 for i = 1:(length(range)-1)
     xrange(i) = range(i)+(range(i+1)-range(i))/2;
 end
-mc_min_tau = -1;
-mc_max_tau = 1; 
+mc_min_tau = -1+0.1;
+mc_max_tau = 1-0.1; 
 % global mc_intensity;
-mc_intensity = zeros(length(range)-1,  1);
+qmc_intensity = zeros(length(range)-1,  1);
  
  for i=1:Nr
    % z_mc = 0;
-    z_mc = -(surfaces(1).zmax-surfaces(1).zmin)*rand(1)+surfaces(1).zmax;
-   % z_mc = (4)*rand(1)-(2);
-    %tau_mc = ((2*5/sqrt(9.5^2+25))*rand(1)-5/sqrt(9.5^2+125));
-    tau_mc = (mc_min_tau+(mc_max_tau-mc_min_tau)*rand(1));
+    z_mc = surfaces(1).zmin+2*surfaces(1).zmax*x(i,1);
+    tau_mc = -1+2*x(i,2);
    %  z_mc = input('z ');   
      [z_mc_out, tau_mc_out,path, energy] = ...
          mc_raytracing_paths(surfaces,z_mc, tau_mc, variables, 1);
@@ -58,7 +53,7 @@ mc_intensity = zeros(length(range)-1,  1);
              && z_mc_out<=surfaces(4).zmax-0.01 ...
              && tau_mc_out>=-1+0.01 && tau_mc_out<=1-0.01)
         mc_fill_vector(z_mc, tau_mc, z_mc_out, tau_mc_out, path, energy);
-        mc_intensity = mc_fill_bins(tau_mc_out, mc_intensity, delta);
+        mc_intensity = mc_fill_bins(tau_mc_out, qmc_intensity, delta);
       else
           mc_fill_vector1(z_mc, tau_mc, z_mc_out, tau_mc_out, path, energy);
       end

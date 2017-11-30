@@ -38,7 +38,7 @@ while( k~=4 && k~=5 && k~=6  && k~=1 && k~=7 && surfaces_hit<100)
     [k] = distances(xn,zn,ray,s,valid);    
     %  disp([' closest intersection from surface ',num2str(k),' ',surfaces(k).name]);
     % (x,z) = coordinates of the closer intersection
-    if(k~=7)
+    %if(k~=7)
         ray.x = xn(k);                        
         ray.z = zn(k);
 
@@ -48,7 +48,7 @@ while( k~=4 && k~=5 && k~=6  && k~=1 && k~=7 && surfaces_hit<100)
 
         [ray1, ray2,ray,check, energy] = surfaces(k).action(ray,surfaces(k), ...
                                                   k, x0, z0, variables, 1);
-    end
+    %end
     if ( graf)
          figure(3)
          hold on
@@ -84,13 +84,13 @@ while( k~=4 && k~=5 && k~=6  && k~=1 && k~=7 && surfaces_hit<100)
 
 
  % xout = xn(k);
- if(k~=7)
+ %if(k~=7)
      zout = zn(k);
      thetaout = ray.sz;
      last_surface =  k;
- else
-     xout= 0;                        
-     zout = 0;
-     thetaout = tau;
-     last_surface = k;
- end
+%  else
+%      xout= 0;                        
+%      zout = 0;
+%      thetaout = tau;
+%      last_surface = k;
+%  end

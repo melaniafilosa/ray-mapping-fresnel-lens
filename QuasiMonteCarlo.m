@@ -33,7 +33,7 @@ rng(7);
 % global mc_intensity;
 delta = 0.02;
 range = -1: delta: 1;
-Nr = 10^5;
+Nr = 10^3;
 graf = 0;
 % if(graf)
 %     figure(1)
@@ -44,19 +44,18 @@ graf = 0;
 for i = 1:(length(range)-1)
     xrange(i) = range(i)+(range(i+1)-range(i))/2;
 end
-mc_min_tau = -1;
-mc_max_tau = 1; 
-qmc_intensity = zeros(length(range)-1,  1);
+mc_min_tau = -1+0.1;
+mc_max_tau = 1-0.1; 
 % % Create a sobol set in two dimensions
 P = sobolset(2);
 x = net(P, Nr);
 % %figure(4)
 % figure(1)
 % hold on
-mc_intensity = zeros(length(range)-1,  1);
+qmc_intensity = zeros(length(range)-1,  1);
  for i=1:Nr
      z_mc = surfaces(1).zmin+2*surfaces(1).zmax*x(i,1);
-     tau_mc = -1+2*x(i,2);
+     tau_mc = -1+0.1+2*x(i,2);
 %      figure(1)
 %      plot(z_mc, tau_mc, '.');
 %      hold on
@@ -69,7 +68,7 @@ mc_intensity = zeros(length(range)-1,  1);
              && z_mc_out<=surfaces(4).zmax)
          %-0.01)
       mc_fill_vector(z_mc, tau_mc, z_mc_out, tau_mc_out, path);
-      qmc_intensity = mc_fill_bins(tau_mc_out, mc_intensity, delta);
+      qmc_intensity = mc_fill_bins(tau_mc_out, qmc_intensity, delta);
      else 
          %if(last_surface~=1)
              mc_fill_vector1(z_mc, tau_mc, z_mc_out, tau_mc_out, path);

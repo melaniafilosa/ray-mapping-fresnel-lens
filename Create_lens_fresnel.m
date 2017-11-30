@@ -16,7 +16,7 @@ xa = (-B-sqrt(B^2-4*A*C))/(2*A);
 xa1 = -xa+2*l;
 n1= 1; n2= 1.5;
 
-figure(3)
+%figure(3)
 k = 1;
 surfaces(k).name='source';
 surfaces(k).xmin = 0;
@@ -29,8 +29,8 @@ surfaces(k).n1=n1;
 surfaces(k).n2=n1;
 surfaces(k).intersection=@line_intersection;
 surfaces(k).action=@empty;
-hold on
-plot(surfaces(k).x, surfaces(k).z, '  r', 'Linewidth',2.5)
+% hold on
+% plot(surfaces(k).x, surfaces(k).z, '  r', 'Linewidth',2.5)
 
 k = 2;
 surfaces(k).name='left lens';
@@ -44,7 +44,7 @@ surfaces(k).n1=n1;
 surfaces(k).n2=n2;
 surfaces(k).intersection=@ellipse_intersection;
 surfaces(k).action=@fresnel;
-plot(surfaces(k).x, surfaces(k).z, '  b', 'Linewidth',2.5)
+%plot(surfaces(k).x, surfaces(k).z, '  b', 'Linewidth',2.5)
 k = 3;
 surfaces(k).name='right lens';
 surfaces(k).xmin = min(xa1);
@@ -57,7 +57,7 @@ surfaces(k).n1=n1;
 surfaces(k).n2=n2;
 surfaces(k).intersection=@ellipse_intersection;
 surfaces(k).action=@fresnel;
-plot(surfaces(k).x, surfaces(k).z, 'b', 'Linewidth',2.5)
+%plot(surfaces(k).x, surfaces(k).z, 'b', 'Linewidth',2.5)
 % k = 4;
 % surfaces(k).name='top lens';
 % surfaces(k).xmin = surfaces(2).xmax;
@@ -97,7 +97,7 @@ surfaces(k).n1=n1;
 surfaces(k).n2=n1;
 surfaces(k).intersection=@line_intersection;
 surfaces(k).action=@empty;
-plot(surfaces(k).x, surfaces(k).z, 'r', 'Linewidth',2.5)
+%plot(surfaces(k).x, surfaces(k).z, 'r', 'Linewidth',2.5)
 k = 5;
 surfaces(k).name='detector bottom';
 surfaces(k).xmin = 0;
@@ -110,7 +110,7 @@ surfaces(k).n1=n1;
 surfaces(k).n2=n1;
 surfaces(k).intersection=@line_intersection;
 surfaces(k).action=@empty;
-plot([0 2*l], [-h-eps -h-eps], 'g', 'Linewidth',2.5)
+%plot([0 2*l], [-h-eps -h-eps], 'g', 'Linewidth',2.5)
 k = 6;
 surfaces(k).name='detector top';
 surfaces(k).xmin = 0;
@@ -123,8 +123,8 @@ surfaces(k).n1=n1;
 surfaces(k).n2=n1;
 surfaces(k).intersection=@line_intersection;
 surfaces(k).action=@empty;
-plot([0 2*l],[h+eps h+eps], 'g', 'Linewidth',2.5)
-axis([0 20 -h-eps h+eps])
+% plot([0 2*l],[h+eps h+eps], 'g', 'Linewidth',2.5)
+% axis([0 20 -h-eps h+eps])
 
 % k = 7;
 % surfaces(k).name='detector left top';
