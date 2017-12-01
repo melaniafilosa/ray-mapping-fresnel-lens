@@ -44,8 +44,8 @@ graf = 0;
 for i = 1:(length(range)-1)
     xrange(i) = range(i)+(range(i+1)-range(i))/2;
 end
-mc_min_tau = -1+0.1;
-mc_max_tau = 1-0.1; 
+mc_min_tau = -1;
+mc_max_tau = 1; 
 % % Create a sobol set in two dimensions
 P = sobolset(2);
 x = net(P, Nr);

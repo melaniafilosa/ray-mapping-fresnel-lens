@@ -97,7 +97,7 @@ surfaces(k).n1=n1;
 surfaces(k).n2=n1;
 surfaces(k).intersection=@line_intersection;
 surfaces(k).action=@empty;
-plot(surfaces(k).x, surfaces(k).z, 'r', 'Linewidth',2.5)
+%plot(surfaces(k).x, surfaces(k).z, 'r', 'Linewidth',2.5)
 k = 5;
 surfaces(k).name='detector bottom';
 surfaces(k).xmin = 0;
@@ -110,7 +110,7 @@ surfaces(k).n1=n1;
 surfaces(k).n2=n1;
 surfaces(k).intersection=@line_intersection;
 surfaces(k).action=@empty;
-plot([0 2*l], [-h-eps -h-eps], 'g', 'Linewidth',2.5)
+%plot([0 2*l], [-h-eps -h-eps], 'g', 'Linewidth',2.5)
 k = 6;
 surfaces(k).name='detector top';
 surfaces(k).xmin = 0;
@@ -123,8 +123,8 @@ surfaces(k).n1=n1;
 surfaces(k).n2=n1;
 surfaces(k).intersection=@line_intersection;
 surfaces(k).action=@empty;
-plot([0 2*l],[h+eps h+eps], 'g', 'Linewidth',2.5)
-axis([0 20 -h-eps h+eps])
+% plot([0 2*l],[h+eps h+eps], 'g', 'Linewidth',2.5)
+% axis([0 20 -h-eps h+eps])
 
 % k = 7;
 % surfaces(k).name='detector left top';

@@ -26,7 +26,7 @@ number_target = 4;
 ray1.z = surfaces(4).zmin+0.01;
 %ray1.z = input('targetA');
 ray2.z = surfaces(4).zmax-0.01;
-N_z_bins = 10;
+N_z_bins = 1;
 step = (ray2.z-ray1.z)/1;
   k = 1;
  eta2(k) = 0.162;
@@ -61,22 +61,22 @@ for t = ray1.z:step:ray2.z-step
   %end
 end
 
-
-H = -1+eps_target_angle:delta1:1-eps_target_angle;
-
-k = 0;
-for i = 1:length(H)-1
-    delta2 = (H(2)-H(1))/N_tau_bins;
-    interval = (H(i)+(0:N_tau_bins)*delta2)';
-    intensity = int2(k+1:k+length(interval))';
-    % intensity = intensity2(k+1:k+length(interval))';
-    k = k+length(interval)-1;
-    average_intensity(i) = (1/(interval(end)-interval(1)))*trapz(interval, intensity);
-    area(i) = trapz(interval, 1/(interval(end)-interval(1))*intensity);
-    
-end
-
-intensity = average_intensity./sum(area);
+% 
+% H = -1+eps_target_angle:delta1:1-eps_target_angle;
+% 
+% k = 0;
+% for i = 1:length(H)-1
+%     delta2 = (H(2)-H(1))/N_tau_bins;
+%     interval = (H(i)+(0:N_tau_bins)*delta2)';
+%     intensity = int2(k+1:k+length(interval))';
+%     % intensity = intensity2(k+1:k+length(interval))';
+%     k = k+length(interval)-1;
+%     average_intensity(i) = (1/(interval(end)-interval(1)))*trapz(interval, intensity);
+%     area(i) = trapz(interval, 1/(interval(end)-interval(1))*intensity);
+%     
+% end
+% 
+% intensity = average_intensity./sum(area);
 % etendue2 = trapz(H(1:end-1), average_intensity);
 toc
 

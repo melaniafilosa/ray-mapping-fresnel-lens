@@ -6,6 +6,7 @@ function intensity = interpolation(intensity, targetA, targetB, ....
 for z = targetA.z+0.01:(targetB.z-targetA.z-0.02)/500:targetB.z-0.01
     % trace the rays with z coordinates = i
     % and tau coordinates = target.sz
+
     i = 1;
     targetC.z = z;
     targetC.x = surfaces(4).xmax;
@@ -26,7 +27,9 @@ for z = targetA.z+0.01:(targetB.z-targetA.z-0.02)/500:targetB.z-0.01
         K = length(pathC);
         if(action(K)==1)
             C = Ct;
-            C.I = Ct.T;
+            if(C.surface~=1)
+               C.I = Ct.T;
+            end
             if(Cr.n==1)
                 C.n = 1.5;
             else
@@ -35,7 +38,9 @@ for z = targetA.z+0.01:(targetB.z-targetA.z-0.02)/500:targetB.z-0.01
        
         else
             C = Cr;
-            C.I = Cr.R;
+            if(C.surface~=1)
+              C.I = Cr.R;
+            end
             if(Cr.n==1)
                 C.n = 1;
             else
@@ -50,13 +55,15 @@ for z = targetA.z+0.01:(targetB.z-targetA.z-0.02)/500:targetB.z-0.01
                 || (C.surface==5)|| (C.surface==6) || (C.surface==7))
                 pathC = [pathC, C.surface];
                 i = length(pathC);
-                intensity = [intensity, C.I];
-                figure(1)
-                hold on
-                plot(targetC.z, targetC.sz, '. r')
+%                 if(C.surface~=1)
+%                  intensity = [intensity, C.I];
+%                 end
+%                 figure(1)
+%                 hold on
+%                 plot(targetC.z, targetC.sz, '. r')
                 figure(2)
                 hold on
-                plot(asin(C.sz)*180/pi, C.I, '. b')
+                plot(targetC.z, C.I, '. b')
                 drawnow
             else
                pathC = [pathC, C.surface];
@@ -64,5 +71,6 @@ for z = targetA.z+0.01:(targetB.z-targetA.z-0.02)/500:targetB.z-0.01
              i = i+1;
             
         end
-     end
+    end
+     intensity = [intensity, C.I];
 end

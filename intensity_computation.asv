@@ -21,7 +21,7 @@ function intensity = intensity_computation(A, B, targetA, targetB,...
 %                 drawnow
 %                 disp(['pathA ', num2str(pathA)]);
 %                 disp(['pathB ', num2str(pathB)]);
-
+target
                 intensity = [intensity, A.I];
                 intensity = interpolation(intensity, targetA, targetB, ....
                                    pathA, A, B,variables, surfaces, action);
@@ -74,10 +74,10 @@ function intensity = intensity_computation(A, B, targetA, targetB,...
                     % K
                  end
                   if(action(K)==1)
-                     if(At.surface~=1)&&(Bt.surface~=1)
+                      if(At.surface~=1)&&(Bt.surface~=1)
                           At.I = A.I*TA;
                           Bt.I = B.I*TB;
-                     end
+                      end
                       intensity = intensity_computation(At, Bt, targetA,...
                                          targetB, pathA,pathB, surfaces, action, ...
                                          variables, intensity); 

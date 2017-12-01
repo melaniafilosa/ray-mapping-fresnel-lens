@@ -16,14 +16,14 @@ xa = (-B-sqrt(B^2-4*A*C))/(2*A);
 xa1 = -xa+2*l;
 n1= 1; n2= 1.5;
 
-graf = 1;
+graf = 0;
 k = 1;
 surfaces(k).name='source';
-surfaces(k).xmin = 10;
-surfaces(k).xmax = 10;
+surfaces(k).xmin = 0;
+surfaces(k).xmax = 0;
 surfaces(k).zmin = -h;
 surfaces(k).zmax = h;
-surfaces(k).x=[10; 10];
+surfaces(k).x=[0; 0];
 surfaces(k).z=[-h; h];
 surfaces(k).n1=n1;
 surfaces(k).n2=n1;

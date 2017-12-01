@@ -28,7 +28,7 @@ for  i=1:length(surfaces)
       [xn(i),zn(i),s(i), valid(i)] = ...
           surfaces(i).intersection(ray, surfaces(i), variables);
 end
-plot(xn(k), zn(k), '*')
+%plot(xn(k), zn(k), '*')
 [k] = distances(xn,zn,ray,s,valid);    
 if(k==-1)
    % disp('Error')
@@ -39,9 +39,9 @@ if(k~=7)
     ray.x = xn(k);                        
     ray.z = zn(k);
     ray.surface = k;
-    figure(4)
-    hold on
-    plot([x0, xn(k)], [z0, zn(k)], ' g', 'linewidth', 1.2);
+%     figure(4)
+%     hold on
+%     plot([x0, xn(k)], [z0, zn(k)], ' g', 'linewidth', 1.2);
     [reflected, transmitted, R, T] = surfaces(k).action(ray,surfaces(k),...
                                                         k,variables);
 else
