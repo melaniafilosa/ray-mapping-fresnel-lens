@@ -27,7 +27,7 @@ variables = Create_variables();
 surfaces = Create_lens_fresnel(variables);
 delta = 0.02;
 range = -1: delta: 1;
-Nr = 10^3;
+Nr = 10^7;
 % z_mc = input('z ');
 % tau_mc = input('tau ');
 
@@ -45,15 +45,15 @@ qmc_intensity = zeros(length(range)-1,  1);
  for i=1:Nr
    % z_mc = 0;
     z_mc = surfaces(4).zmin+2*surfaces(4).zmax*x(i,1);
-   %tau_mc = -1+2*x(i,2);
-   tau_mc = 0.162;
+   tau_mc = -1+2*x(i,2);
+   %tau_mc = 0.162;
    %  z_mc = input('z ');   
      [z_mc_out, tau_mc_out,path, energy] = ...
          mc_raytracing_paths(surfaces,z_mc, tau_mc, variables, 1);
      f = find(path);
  
-      if (path(f(end))==1 && z_mc_out>=surfaces(1).zmin ...
-             && z_mc_out<=surfaces(1).zmax ...
+      if (path(f(end))==4 && z_mc_out>=surfaces(4).zmin ...
+             && z_mc_out<=surfaces(4).zmax ...
              && tau_mc_out>=-1 && tau_mc_out<=1)
         mc_fill_vector(z_mc, tau_mc, z_mc_out, tau_mc_out, path, energy);
         qmc_intensity = mc_fill_bins(tau_mc_out, qmc_intensity, delta);

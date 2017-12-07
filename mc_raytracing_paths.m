@@ -1,7 +1,7 @@
 function [zout, thetaout,path, energy]=mc_raytracing_paths(surfaces, z , tau,...
     variables, energy)
 
-graf = 1;
+graf = 0;
 p.wavelength=600;
 M=10;                     % max lenght of the path
 raypath.wavelength=600;
@@ -12,15 +12,15 @@ a=2;
 k = -1;
 % (x,z) = coordinates of the initial position 
 ray.z = z;  
-ray.x = surfaces(4).x(1);       
+ray.x = surfaces(1).x(1);       
 % Initial angle with respect to the optical axis
 % Ray direction
 ray.sz = tau;
-ray.sx = -sqrt(1-tau^2);
+ray.sx = sqrt(1-tau^2);
 % store initial conditions for debugging
 ray.n=1;                           % we start in air
 surface=zeros(M,1);
-surface(1)=4;
+surface(1)=1;
 s = zeros(8,1);                        
 % s = parameter for the ray parameterization
 xn = zeros(length(surfaces),1);                  % xn(i) = x- s(i)*sin(theta)
