@@ -27,7 +27,7 @@ variables = Create_variables();
 surfaces = Create_lens_fresnel(variables);
 delta = 0.02;
 range = -1: delta: 1;
-Nr = 10^7;
+Nr = 10^6;
 % z_mc = input('z ');
 % tau_mc = input('tau ');
 
@@ -44,7 +44,7 @@ qmc_intensity = zeros(length(range)-1,  1);
  
  for i=1:Nr
    % z_mc = 0;
-    z_mc = surfaces(4).zmin+2*surfaces(4).zmax*x(i,1);
+    z_mc = surfaces(1).zmin+2*surfaces(1).zmax*x(i,1);
    tau_mc = -1+2*x(i,2);
    %tau_mc = 0.162;
    %  z_mc = input('z ');   
